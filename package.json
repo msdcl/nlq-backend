@@ -1,0 +1,51 @@
+{
+  "name": "nlq-backend",
+  "version": "1.0.0",
+  "description": "Natural Language Query Backend API",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.2.1",
+    "@langchain/community": "^0.3.55",
+    "@langchain/core": "^0.3.76",
+    "@langchain/google-genai": "^0.2.18",
+    "@langchain/openai": "^0.6.11",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "langchain": "^0.1.37",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.3",
+    "pgvector": "^0.1.8",
+    "sql-formatter": "^15.3.2",
+    "sql-parser": "^0.5.0",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
+  },
+  "keywords": [
+    "nlq",
+    "natural-language",
+    "sql",
+    "ai",
+    "llm"
+  ],
+  "author": "NLQ Team",
+  "license": "MIT"
+}
