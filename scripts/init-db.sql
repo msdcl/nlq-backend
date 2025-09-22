@@ -28,6 +28,9 @@ GRANT ALL PRIVILEGES ON DATABASE nlq_vectors TO nlq_user;
 -- Connect to nlq_database and create sample tables
 \c nlq_database;
 
+-- Enable pgvector extension in main database as well
+CREATE EXTENSION IF NOT EXISTS vector;
+
 -- Create sample tables for demonstration
 CREATE TABLE IF NOT EXISTS customers (
     id SERIAL PRIMARY KEY,

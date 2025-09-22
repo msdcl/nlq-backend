@@ -1,6 +1,9 @@
 -- E-commerce Database Setup Script
 -- Creates tables and inserts comprehensive dummy data for dashboard analytics
 
+-- Enable pgvector extension
+CREATE EXTENSION IF NOT EXISTS vector;
+
 -- Drop existing tables if they exist (in correct order due to foreign keys)
 DROP TABLE IF EXISTS order_items CASCADE;
 DROP TABLE IF EXISTS orders CASCADE;

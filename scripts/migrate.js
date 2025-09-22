@@ -88,6 +88,9 @@ class DatabaseMigrator {
     const client = await this.primaryDB.connect();
     
     try {
+      // Enable pgvector extension in primary database
+      await client.query('CREATE EXTENSION IF NOT EXISTS vector;');
+      
       // Create sample tables for demonstration
       await client.query(`
         CREATE TABLE IF NOT EXISTS customers (

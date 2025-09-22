@@ -254,6 +254,59 @@ Return ONLY the SQL query without any explanations or markdown formatting.
   }
 
   /**
+   * Get schema information for all tables
+   * @returns {Promise<Object>} Schema information
+   */
+  async getSchemaInfo() {
+    try {
+      logger.info('Getting schema information from AdvancedNLQService');
+
+      // Get all table names
+      const tablesQuery = `
+        SELECT table_name 
+        FROM information_schema.tables 
+        WHERE table_schema = 'public' 
+        AND table_type = 'BASE TABLE'
+        ORDER BY table_name;
+      `;
+      
+      const tablesResult = await this.primaryDB.query(tablesQuery);
+      const tableNames = tablesResult.rows.map(row => row.table_name);
+
+      const schemaInfo = {};
+
+      // Get schema for each table
+      for (const tableName of tableNames) {
+        try {
+          const tableSchema = await this.getTableSchema(tableName);
+          schemaInfo[tableName] = tableSchema;
+        } catch (error) {
+          logger.error(`Failed to get schema for table ${tableName}:`, error);
+          schemaInfo[tableName] = [];
+        }
+      }
+
+      return {
+        success: true,
+        schema: schemaInfo,
+        metadata: {
+          generated_at: new Date().toISOString(),
+          tableCount: tableNames.length,
+          tables: tableNames
+        }
+      };
+
+    } catch (error) {
+      logger.error('Failed to get schema info:', error);
+      return {
+        success: false,
+        error: error.message,
+        schema: {}
+      };
+    }
+  }
+
+  /**
    * Step 4: Validate SQL syntax and ensure only SELECT queries
    */
   async validateSQL(sql) {
