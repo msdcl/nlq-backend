@@ -214,9 +214,8 @@ coverage/
 ecosystem.config.js
 
 # Docker files (if not needed in repo)
-Dockerfile
-docker-compose.yml
-.dockerignore
+
+
 
 # Backup files
 *.backup
